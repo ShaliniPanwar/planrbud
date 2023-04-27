@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+Planrbud
+*----------------------*
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Planrbud is a web application for organizing your
+weekly schedule,
+grocery list,
+budget,
+meal plan,
+and outings.
+The app allows you to easily keep track of all the tasks, expenses,
+and events for the week in one place.
 
-## Available Scripts
+Features
+*----------------------*
 
-In the project directory, you can run:
+To-Do List: A simple to-do list to help you keep track of
+your tasks for the week.
 
-### `npm start`
+Grocery List: A grocery list to help you organize your shopping for the week.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Budget: A budget tracker to help you manage your expenses for the week.
+You can add, edit and delete expenses and see the total amount of money spent
+and money remaining.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Weekly Menu Planner: A weekly menu planner that allows you to plan your meals
+for the week. You can edit the meals if you want to change the meal for the day.
 
-### `npm test`
+Outings: An outings tab that shows possible outings for the week,
+including the location, details and how much they cost.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Installation
+*----------------------*
 
-### `npm run build`
+To install Planrbud, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone the repository: git clone https://github.com/shalinipanwar/planrbud.git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navigate to the project directory: cd planrbud
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install the dependencies: npm install
 
-### `npm run eject`
+Start the application: npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Usage
+*----------------------*
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once you have installed Planrbud, you can use the application by navigating to
+http://localhost:3000 in your web browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The application is divided into different tabs, each with its own functionality:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To-Do List: Add and delete tasks for the week.
 
-## Learn More
+Grocery List: Add and delete items from your grocery list.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Budget: Add, edit and delete expenses and track your budget for the week.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Weekly Menu Planner: Plan your meals for the week.
 
-### Code Splitting
+Outings: Add and delete outings for the week, including the location,
+details and cost.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+License
+*----------------------*
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Planrbud is licensed under the MIT License.
