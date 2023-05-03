@@ -56,7 +56,7 @@ function ToDoList() {
         value={newTodo}
         onChange={(event) => setNewTodoText(event.target.value)}
       />
-      <button type="button" onClick={handleAddNewTodo} className="btn btn-block btn-primary">Add</button>
+      <button type="button" onClick={handleAddNewTodo} className="btn btn-block btn-warning">Add</button>
       <ul className="to-do-list list-group list-group-flush">
         {items.map((item) => (
           <div className="row m-2">
