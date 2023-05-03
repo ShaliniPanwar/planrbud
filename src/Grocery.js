@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TiDelete } from "react-icons/ti";
-
+import groceryIcon from './groceryIcon.png';
 
 function Grocery() {
   const [items, setItems] = useState([]);
@@ -65,6 +65,7 @@ function Grocery() {
   return (
     <div className="container bg-light">
       <h2 className="container-heading text-light bg-primary">Grocery List</h2>
+      <img src={groceryIcon} alt="grocery-icon" className="tab-icon"/>
       <input className="new-item-inputbox form-control" type="text" placeholder="Add a new item..." onKeyDown={handleNewItem} />
       <ul className="grocery-list list-group list-group-flush">
         {items.map((item) => (

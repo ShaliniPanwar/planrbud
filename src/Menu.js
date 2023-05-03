@@ -2,6 +2,7 @@ import React, { useState }  from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button } from "react-bootstrap";
+import menuIcon from './menuIcon.png';
 
 function Menu() {
 
@@ -95,6 +96,7 @@ function Menu() {
   return (
     <div className="container bg-light">
       <h2 className="container-heading text-light bg-primary">Menu</h2>
+      <img src={menuIcon} alt="menu-icon" className="tab-icon"/>
       <div className="row m-2 d-flex justify-content-between align-items-center">
         <div className="col-sm-3"><div className="alert alert-secondary m-1">Click for more options!</div></div>
         <div className="col-sm-3">

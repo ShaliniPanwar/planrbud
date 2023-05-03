@@ -3,6 +3,7 @@ import { TiDelete } from "react-icons/ti";
 import { BudgetProvider } from "./context/BudgetContext";
 import { BudgetContext } from "./context/BudgetContext";
 import { v4 as uuidv4} from 'uuid';
+import budgetIcon from './budgetIcon.png';
 
 function Budget() {
 
@@ -49,6 +50,7 @@ function Budget() {
     <BudgetProvider>
     <div className="container bg-light">
       <h2 className="container-heading text-light bg-primary">Budget</h2>
+      <img src={budgetIcon} alt="budget-icon" className="tab-icon"/>
       <div className="row mt-3">
       <div className="col-sm">
         <div className="alert alert-warning">

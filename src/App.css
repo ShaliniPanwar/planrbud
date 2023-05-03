@@ -68,3 +68,8 @@
   padding-bottom: 3px;
   border-radius:10px;
 }
+
+.tab-icon {
+  width: 15%;
+  border-radius: 50%;
+}
