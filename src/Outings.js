@@ -184,33 +184,6 @@ function Outings() {
       {/* Heading and icon for the Outings component */}
       <h2 className="container-heading text-light bg-primary">Outings</h2>
       <img src={outingsIcon} alt="outings-icon" className="tab-icon"/>
-      {/* Location and geographical location (fetched from Open Weather API)
-      based activity suggestions. Loading spinners and text displayed till
-      the data is loading */}
-      <div>
-        {isLoading ? (
-            <div>
-              <h1>Loading...</h1>
-              <div className="spinner-grow text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-              </div>
-              <div className="spinner-grow text-success" role="status">
-              <span className="visually-hidden">Loading...</span>
-              </div>
-              <div className="spinner-grow text-danger" role="status">
-              <span className="visually-hidden">Loading...</span>
-              </div>
-              <div className="spinner-grow text-warning" role="status">
-              <span className="visually-hidden">Loading...</span>
-              </div>
-              <div className="spinner-grow text-info" role="status">
-              <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          ) : (
-          getActivitySuggestions() 
-        )}
-      </div>
        {/* Bucket List */}
       <div className="card m-3 mx-auto" style={{width: "90%"}}>
         <div className="card-body bg-warning">
@@ -238,6 +211,33 @@ function Outings() {
               <button type="button" onClick={handleAddNewItem} className="btn btn-lg rounded-circle m-1 btn-warning">+</button>
             </li>
         </ul>
+      </div>
+      {/* Location and geographical location (fetched from Open Weather API)
+      based activity suggestions. Loading spinners and text displayed till
+      the data is loading */}
+      <div>
+        {isLoading ? (
+            <div>
+              <h1>Loading...</h1>
+              <div className="spinner-grow text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-success" role="status">
+              <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+          getActivitySuggestions() 
+        )}
       </div>
       {/* Footer to credit Open Weather API for the location and weather data */}
       <div className="d-flex justify-content-end align-items-center small">
