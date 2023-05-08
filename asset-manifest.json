@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/planrbud/static/css/main.f7d27bcd.css",
+    "main.js": "/planrbud/static/js/main.0228546c.js",
+    "static/js/496.f77a90f1.chunk.js": "/planrbud/static/js/496.f77a90f1.chunk.js",
+    "static/media/menuIcon.png": "/planrbud/static/media/menuIcon.7fa0edcc106b665fd202.png",
+    "static/media/logo.png": "/planrbud/static/media/logo.bd7051144e143290688f.png",
+    "static/media/budgetIcon.png": "/planrbud/static/media/budgetIcon.24d06e55d7b03a8d9ced.png",
+    "static/media/outingsIcon.png": "/planrbud/static/media/outingsIcon.430bb871893f2eba90e7.png",
+    "static/media/openWeatherLogo.jpg": "/planrbud/static/media/openWeatherLogo.70978697076e8ff9c810.jpg",
+    "static/media/todoIcon.png": "/planrbud/static/media/todoIcon.dc0123aac51ec4b659a2.png",
+    "static/media/groceryIcon.png": "/planrbud/static/media/groceryIcon.bcc4787b5729a852be13.png",
+    "index.html": "/planrbud/index.html",
+    "main.f7d27bcd.css.map": "/planrbud/static/css/main.f7d27bcd.css.map",
+    "main.0228546c.js.map": "/planrbud/static/js/main.0228546c.js.map",
+    "496.f77a90f1.chunk.js.map": "/planrbud/static/js/496.f77a90f1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f7d27bcd.css",
+    "static/js/main.0228546c.js"
+  ]
+}
