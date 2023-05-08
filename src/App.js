@@ -5,7 +5,6 @@ import Budget from "./Budget";
 import Grocery from "./Grocery";
 import Menu from "./Menu";
 import Outings from "./Outings";
-import { BudgetProvider } from "./context/BudgetContext";
 import './App.css';
 
 function App() {
@@ -39,13 +38,11 @@ function App() {
         </div>
       )}
       {activeTab === "budget" && (
-        <BudgetProvider>
         <div>
           <div>
           <Budget />
           </div>
         </div>
-        </BudgetProvider>
       )}
       {activeTab === "grocery" && (
         <div>

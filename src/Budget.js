@@ -1,141 +1,153 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { TiDelete } from "react-icons/ti";
-import { BudgetProvider } from "./context/BudgetContext";
-import { BudgetContext } from "./context/BudgetContext";
-import { v4 as uuidv4} from 'uuid';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import budgetIcon from './budgetIcon.png';
 
 function Budget() {
+  const [budget, setBudget] = useState(500);
+  const [expenses, setExpenses] = useState([
+    { id:1, name: "Grocery Shopping", cost: 180},
+    { id:2, name: "Household Shopping", cost: 70},
+    { id:3, name: "Savings", cost: 100},
+    { id:4, name: "Food Ordering", cost: 50},
+    { id:5, name: "Outings", cost: 100},
+  ]);
+  const [name, setName] = useState("");
+  const [cost, setCost] = useState("");
 
-  const { budget } = useContext(BudgetContext);
-  const { expenses } = useContext(BudgetContext);
-  const { dispatch } = useContext(BudgetContext);
-  const [name, setName] = useState('');
-  const [cost, setCost] = useState('');
-  const [newBudget, setNewBudget] = useState(budget);
+  useEffect(() => {
+    const storedBudget = JSON.parse(localStorage.getItem("budget")) || 500;
+    setBudget(storedBudget);
+    const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || expenses;
+    setExpenses(storedExpenses);
+  }, [expenses]);
 
-  const totalExpenses = expenses.reduce((total, item) => {
-    return (total = total + item.cost);
-  }, 0);
+  useEffect(() => {
+    const totalExpenses = expenses.reduce((total, item) => {
+      return (total = total + item.cost);
+    }, 0);
+    const spent = totalExpenses;
+    const remaining = budget - totalExpenses;
+    updateLocalStorage("totalExpenses", totalExpenses);
+    updateLocalStorage("spent", spent);
+    updateLocalStorage("remaining", remaining);
+  }, [expenses, budget]);
 
-  const alertType = totalExpenses > newBudget ? "alert-danger" : "alert-success";
+  const totalExpenses = JSON.parse(localStorage.getItem("totalExpenses")) || 0;
+  const spent = JSON.parse(localStorage.getItem("spent")) || 0;
+  const remaining = JSON.parse(localStorage.getItem("remaining")) || budget;
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const expense = {
-      id: uuidv4(),
-      name: name,
-      cost: parseInt(cost),
-    };
-    dispatch({
-      type: 'ADD_EXPENSE',
-      payload: expense,
-    });
-    setName('');
-    setCost('');
+  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
+
+  function handleEditBudget (){
+    const newBudget = prompt("Enter new budget:");
+    setBudget(newBudget);
+    updateLocalStorage("budget", newBudget);
   };
+
+  function handleAddNewExpense(event) {
+    event.preventDefault();
+    const newItem = {
+      id: new Date().getTime(),
+      name: name,
+      cost: Number(cost),
+    };
+    setExpenses((prev) => {
+      const updatedItems = [...prev, newItem];
+      updateLocalStorage("expenses", updatedItems);
+      return updatedItems;
+    });
+    setName("");
+    setCost("");
+  };
+  
+  
 
   const handleDeleteExpense = (expense) => {
-    dispatch({
-      type: "DELETE_EXPENSE",
-      payload: expense.id,
-    });
+    const updatedExpenses = expenses.filter((item) => item.id !== expense.id);
+    setExpenses(updatedExpenses); // updating the expenses state with the new items array
+    updateLocalStorage("expenses", updatedExpenses);
   };
 
-  const handleReset = () => {
-  dispatch({ type: "RESET" });
-  };
+  function updateLocalStorage(key, updatedItem) {
+    // saving the current list as a JSON string in localStorage with the given key
+    localStorage.setItem(key, JSON.stringify(updatedItem));
+  }
 
   return (
-    <BudgetProvider>
+    
     <div className="container bg-light">
       <h2 className="container-heading text-light bg-primary">Budget</h2>
       <img src={budgetIcon} alt="budget-icon" className="tab-icon"/>
       <div className="row mt-3">
-      <div className="col-sm">
-        <div className="alert alert-warning">
-          <span>
-            <label htmlFor="newBudget">Edit Budget:</label>
-            <input type="number" id="newBudget" className = "m-2" value={newBudget} onChange={e => setNewBudget(e.target.value)} />
-            <button type="submit" className="btn btn-warning btn-sm" onClick={() => dispatch({type: 'SET_BUDGET', payload: newBudget})}>Set Budget</button>
-          </span>
-        </div>
-      </div>
-      <div className="col-sm">
-        <div className="alert alert-warning">
-          <span>
-            <button className="btn btn-warning" onClick={handleReset}>Reset for a new week</button>
-          </span>
-        </div>
-      </div>
-      </div>
-      <div className="row mt-3">
         <div className="col-sm">
           <div className="alert alert-secondary">
-            <span>Budget: CAD {budget}</span>
+            <span>Budget: ${budget}<FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={handleEditBudget} /></span>
           </div>
         </div>
         <div className="col-sm">
           <div className={`alert ${alertType}`}>
-            <span>Remaining: CAD {budget-totalExpenses}</span>
+            <span>Remaining: ${remaining}</span>
           </div>
         </div>
         <div className="col-sm">
           <div className="alert alert-primary">
-            <span>Spent: CAD {totalExpenses}</span>
+            <span>Spent: ${spent}</span>
           </div>
         </div>
       </div>
-      <h3>Expenses</h3>
-      <ul className="list-group mb-2">
+      <div className="card bg-light mt-3 mx-auto d-block">
+      <div className="card-header d-flex justify-content-between text-light bg-success">Expenses</div>
+      <ul className="list-group list-group-flush mb-2">
         {expenses.map((expense) => (
           <li className="list-group-item d-flex justify-content-between align-items-center">
             {expense.name}
             <div>
               <span className="badge bg-primary rounded-pill mr-3">
-                CAD{expense.cost}
+                $ {expense.cost}
               </span>
               <TiDelete size="1.5em" onClick={() => handleDeleteExpense(expense)}></TiDelete>
             </div>
           </li>
         ))}
-      </ul>
-      <h5>Add Expense</h5>
-      <div className="mt-3">
-        <div className="col-sm">
-          <form onSubmit={onSubmit}>
-            <div className="row">
-              <div className="col-sm">
-                <label for="name">Name</label>
-                <input
-                  required
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}>
-                </input>
-              </div>
-              <div className="col-sm">
-                <label for="cost">Cost</label>
-                <input
-                  required
-                  type="text"
-                  className="form-control"
-                  id="cost"
-                  value={cost}
-                  onChange={(event) => setCost(event.target.value)}>
-                </input>
-              </div>
-              <div className="col-sm">
-                <button type="submit" className="btn btn-primary mt-4">Add</button>
-              </div>
-            </div>
-          </form>
-        </div>
+        <li className="row m-2 align-items-center">
+        <form onSubmit={handleAddNewExpense} className="col">
+    <div className="form-group row">
+      <label htmlFor="name" className="col-sm-2 col-form-label mt-2 text-right">Name</label>
+      <div className="col-sm-3 mt-2">
+        <input
+          required
+          type="text"
+          className="form-control"
+          id="name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+      </div>
+      <label htmlFor="cost" className="col-sm-2 mt-2 col-form-label text-right">Cost</label>
+      <div className="col-sm-3 mt-2">
+        <input
+          required
+          type="text"
+          className="form-control"
+          id="cost"
+          value={cost}
+          onChange={(event) => setCost(event.target.value)}
+        />
+      </div>
+      <div className="col-sm-2">
+        <button type="submit" className="btn rounded-circle btn-success mt-2">+</button>
       </div>
     </div>
-    </BudgetProvider>
+  </form>
+</li>
+
+
+      </ul>
+      </div>
+      
+    </div>
   );
 }
 
