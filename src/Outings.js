@@ -48,7 +48,7 @@ function Outings() {
       .catch((error) => console.log(error));
   }, [latitude, longitude]);
 
-  // Function to generate and activity suggestions based on API data
+  // Function to generate activity suggestions based on API data
   const getActivitySuggestions = () => {
     if (!weatherData || !weatherData.weather || weatherData.weather.length === 0) {
       return null;
