@@ -73,3 +73,17 @@
   width: 15%;
   border-radius: 50%;
 }
+
+/* to prevent nav bar buttons from wrapping to the next line */
+@media screen and (max-width: 768px) {
+  .nav {
+    flex-wrap: nowrap;
+  }
+}
+
+/* to decrease the font size of nav bar buttons on smaller screens */
+@media screen and (max-width: 480px) {
+  .nav button {
+    font-size: 0.8rem;
+  }
+}
