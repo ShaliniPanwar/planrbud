@@ -83,15 +83,7 @@ function Menu() {
 
   // Using the useEffect hook to load saved meals
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("meals")) || [
-      ["MONDAY", "Poha & boiled eggs", "Daal-rice & yogurt", "Daal-spinach khichri"], 
-      ["TUESDAY", "Oats-chia-seed pudding", "Sambhar-dosa & chutney", "Paneer scramble & roti"],
-      ["WEDNESDAY", "Egg sandwich & sprouts", "Rajma-rice & raita", "Chicken curry & roti"],
-      ["THURSDAY", "Daal chilla & fruit", "Chicken curry & roti", "Veggie noodles & soup"],
-      ["FRIDAY", "French toast & smoothie", "Mixed veg-roti & raita", "Egg curry & rice"],
-      ["SATURDAY","Besan chilla and smoothie", "Matar paneer & roti", "Pasta & tomato soup"],
-      ["SUNDAY", "Paneer paratha & sprouts", "Chole-rice & raita", "Soya pulav & soup"]
-    ]; // if there is no saved item, an array with defualt values is returned
+    const storedItems = JSON.parse(localStorage.getItem("meals")) || []; // if there is no saved item, an empty array is returned
     setMeals(storedItems); // updating the state with saved items
   }, []);
 
