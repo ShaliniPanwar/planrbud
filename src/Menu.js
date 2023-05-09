@@ -1,28 +1,27 @@
 // Importing necessary dependencies
 import React, { useState, useEffect }  from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, Button } from "react-bootstrap";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+// import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import menuIcon from './menuIcon.png';
 
 // Creating the Menu compoenent
 function Menu() {
 
   // Defining and initializing state variables using the useState hook
-  // 2-D array containing day-wise meals, 3 meals per day
-  const [meals, setMeals] = useState([
-    ["MONDAY", "Poha & boiled eggs", "Daal-rice & yogurt", "Daal-spinach khichri"], 
-    ["TUESDAY", "Oats-chia-seed pudding", "Sambhar-dosa & chutney", "Paneer scramble & roti"],
-    ["WEDNESDAY", "Egg sandwich & sprouts", "Rajma-rice & raita", "Chicken curry & roti"],
-    ["THURSDAY", "Daal chilla & fruit", "Chicken curry & roti", "Veggie noodles & soup"],
-    ["FRIDAY", "French toast & smoothie", "Mixed veg-roti & raita", "Egg curry & rice"],
-    ["SATURDAY","Besan chilla and smoothie", "Matar paneer & roti", "Pasta & tomato soup"],
-    ["SUNDAY", "Paneer paratha & sprouts", "Chole-rice & raita", "Soya pulav & soup"]
+  // array of objects storing day-wise meals, 3 meals per day
+  const [menuCard, setMenuCard] = useState([
+    { id:1, day: "MONDAY", breakfast: "Poha & boiled eggs", lunch: "Daal-rice & yogurt", dinner: "Daal-spinach khichri"},
+    { id:2, day: "TUESDAY", breakfast: "Oats-chia-seed pudding", lunch: "Sambhar-dosa & chutney", dinner: "Paneer scramble & roti"},
+    { id:3, day: "WEDNESDAY", breakfast: "Egg sandwich & sprouts", lunch: "Rajma-rice & raita", dinner: "Chicken curry & roti"},
+    { id:4, day: "THURSDAY", breakfast: "Daal chilla & fruit", lunch: "Chicken curry & roti", dinner: "Veggie noodles & soup"},
+    { id:5, day: "FRIDAY", breakfast: "French toast & smoothie", lunch: "Mixed veg-roti & raita", dinner: "Egg curry & rice"},
+    { id:6, day: "SATURDAY", breakfast: "Besan chilla and smoothie", lunch: "Matar paneer & roti", dinner: "Pasta & tomato soup"},
+    { id:7, day: "SUNDAY", breakfast: "Paneer paratha & sprouts", lunch: "Chole-rice & raita", dinner: "Soya pulav & soup"},
   ]);
-  // Array of days
-  const days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
-  // Array of background colors for day-wise menu cards
-  const bgColors = ["bg-warning", "bg-success", "bg-info"];
+  // Variable for storing the new edited meal
+  // const [newMeal, setNewMeal] = useState("");
+
   // Array containing breakfast options to be displayed in a modal
   const [breakfastOptions] = useState([
     "Berry yogurt bowl",
@@ -83,39 +82,37 @@ function Menu() {
 
   // Using the useEffect hook to load saved meals
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("meals")) || [];
-    if (storedItems.length > 0) {
-      setMeals(storedItems);
-    } else {
-      setMeals([["MONDAY", "Poha & boiled eggs", "Daal-rice & yogurt", "Daal-spinach khichri"],
-        ["TUESDAY", "Oats-chia-seed pudding", "Sambhar-dosa & chutney", "Paneer scramble & roti"],
-        ["WEDNESDAY", "Egg sandwich & sprouts", "Rajma-rice & raita", "Chicken curry & roti"],
-        ["THURSDAY", "Daal chilla & fruit", "Chicken curry & roti", "Veggie noodles & soup"],
-        ["FRIDAY", "French toast & smoothie", "Mixed veg-roti & raita", "Egg curry & rice"],
-        ["SATURDAY", "Besan chilla and smoothie", "Matar paneer & roti", "Pasta & tomato soup"],
-        ["SUNDAY", "Paneer paratha & sprouts", "Chole-rice & raita", "Soya pulav & soup"],
-      ]);
-    }
-  }, []);
+    const storedMenuCard = JSON.parse(localStorage.getItem("menuCard")) || menuCard;
+    setMenuCard(storedMenuCard);
+  }, [menuCard]);
   
   // Function to handle editing of a meal
-  const handleEditMeal = (mealToBeEdited) => {
-    // to initiate prompt for user to enter the changed meal
-    const newMeal = prompt("Enter the new meal:");
-    if(newMeal === null){
-      return;
-    }
-    const updatedMeals = [...meals];
-    updatedMeals[mealToBeEdited]=newMeal;
-    setMeals(updatedMeals); // updating the state with updated meals
-    updateLocalStorage(updatedMeals); // updating the local storage with the updated meals
-  };
+  // function handleEditMeal(changedMenu, key) {
+  //   setNewMeal(prompt("Enter the new meal:"));
+  //   // using the functional form of setState to access the previous state and updating it with the new item
+  //   setMeals((prev) => {
+  //     const updatedItems = [...prev]; // saving the updated items to localStorage
+  //     if(key==="breakfast"){
+  //       updatedItems[changedMenu.id-1].breakfast = newMeal;
+  //     }
+  //     else if(key==="lunch"){
+  //       updatedItems[changedMenu.id-1].lunch = newMeal;
+  //     }
+  //     else if(key==="dinner"){
+  //       updatedItems[changedMenu.id-1].dinner = newMeal;
+  //     }
+  //     updateLocalStorage("meals", updatedItems); // returning the new items array with the new item added
+  //     return updatedItems;
+  //   });
+  //   // clearing the input fields for the new item
+  //   setNewMeal("");
+  // };
 
   // Function to update localStorage with the current meals
-  function updateLocalStorage(mealItems = meals) {
-    // saving the current meals as a JSON string in localStorage 
-    localStorage.setItem("meals", JSON.stringify(mealItems));
-  };
+  // function updateLocalStorage(mealItems = meals) {
+  //   // saving the current meals as a JSON string in localStorage 
+  //   localStorage.setItem("meals", JSON.stringify(mealItems));
+  // };
 
   // // Returning the JSX for the Menu component / Rendering the Menu component
   return (
@@ -176,20 +173,22 @@ function Menu() {
           </div>
         {/* Menu cards - one for each day of the week */}
         <div className="menu-cards">
-          {/* Mapping over days array to render day-wise cards */}
-          {days.map((day, i) => (
-            <div key={i} className="card bg-light mt-3 mx-auto d-block">
-              <div className="card-header d-flex justify-content-between">{day}</div>
+          {menuCard.map((menu) => (
+            <div className="card bg-light mt-3 mx-auto d-block">
+              <div className="card-header d-flex justify-content-between">{menu.day}</div>
                 <ul className="list-group list-group-flush">
-                  {/* Mapping over background colors array to render appropriate color for each meal */}
-                  {bgColors.map((bgColor, j) => (
-                    <li key={j} className={`list-group-item ${bgColor} d-flex justify-content-between`}>
-                    {/* Fetching meal text from meals array */}
-                    {meals[i * 3 + j]}
-                    {/* Edit button to facilitate editing of a meal */}
-                    <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(i * 3 + j)} />
-                    </li>
-                  ))}
+                  <li className={`list-group-item bg-warning d-flex justify-content-between`}>
+                    {menu.breakfast}
+                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "breakfast")} /> */}
+                  </li>
+                  <li className={`list-group-item bg-success d-flex justify-content-between`}>
+                    {menu.lunch}
+                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "lunch")} /> */}
+                  </li>
+                  <li className={`list-group-item bg-info d-flex justify-content-between`}>
+                    {menu.dinner}
+                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "dinner")} /> */}
+                  </li>
                 </ul>
             </div>
           ))}
