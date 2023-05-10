@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/planrbud/static/css/main.7c962dc1.css",
-    "main.js": "/planrbud/static/js/main.d1513bca.js",
+    "main.js": "/planrbud/static/js/main.87669806.js",
     "static/js/496.f77a90f1.chunk.js": "/planrbud/static/js/496.f77a90f1.chunk.js",
     "static/media/menuIcon.png": "/planrbud/static/media/menuIcon.7fa0edcc106b665fd202.png",
     "static/media/logo.png": "/planrbud/static/media/logo.bd7051144e143290688f.png",
@@ -12,11 +12,11 @@
     "static/media/groceryIcon.png": "/planrbud/static/media/groceryIcon.bcc4787b5729a852be13.png",
     "index.html": "/planrbud/index.html",
     "main.7c962dc1.css.map": "/planrbud/static/css/main.7c962dc1.css.map",
-    "main.d1513bca.js.map": "/planrbud/static/js/main.d1513bca.js.map",
+    "main.87669806.js.map": "/planrbud/static/js/main.87669806.js.map",
     "496.f77a90f1.chunk.js.map": "/planrbud/static/js/496.f77a90f1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7c962dc1.css",
-    "static/js/main.d1513bca.js"
+    "static/js/main.87669806.js"
   ]
 }
