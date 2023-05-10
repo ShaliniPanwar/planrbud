@@ -25,8 +25,7 @@ and money remaining.
 Weekly Menu Planner: A weekly menu planner that allows you to plan your meals
 for the week. You can edit the meals if you want to change the meal for the day.
 
-Outings: An outings tab that shows possible outings for the week,
-including the location, details and how much they cost.
+Outings: An outings tab that shows possible outings for the week based on the weather and location. Also includes a bucket list that you can edit.
 
 Installation
 *----------------------*
@@ -57,8 +56,7 @@ Budget: Add, edit and delete expenses and track your budget for the week.
 
 Weekly Menu Planner: Plan your meals for the week.
 
-Outings: Add and delete outings for the week, including the location,
-details and cost.
+Outings: Add and delete possible outings on your bucket list, view suggestions based on the weather.
 
 License
 *----------------------*
