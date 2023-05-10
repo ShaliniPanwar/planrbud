@@ -120,7 +120,7 @@ function Budget() {
         </div>
         <div className="col-sm">
           {/* Alert displaying the current total amount spent */}
-          <div className="alert alertType">
+          <div className={`alert ${alertType}`}>
             <span>Spent: ${spent}</span>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { TiDelete } from "react-icons/ti";
 import openWeatherLogo from './openWeatherLogo.jpg';
 import outingsIcon from './outingsIcon.png';
-import API_KEY from './openWeather';
+// import API_KEY from './openWeather';
 
 //Creating the Outings component
 function Outings() {
@@ -39,6 +39,7 @@ function Outings() {
 
   // Using the useEffect hook for weather data
   useEffect(() => {
+    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
     fetch(url)
       .then((response) => response.json())
