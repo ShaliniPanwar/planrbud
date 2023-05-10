@@ -1,8 +1,8 @@
 // Importing necessary dependencies
 import React, { useState, useEffect }  from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal, Button } from "react-bootstrap";
-// import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import menuIcon from './menuIcon.png';
 
 // Creating the Menu compoenent
@@ -19,8 +19,6 @@ function Menu() {
     { id:6, day: "SATURDAY", breakfast: "Besan chilla and smoothie", lunch: "Matar paneer & roti", dinner: "Pasta & tomato soup"},
     { id:7, day: "SUNDAY", breakfast: "Paneer paratha & sprouts", lunch: "Chole-rice & raita", dinner: "Soya pulav & soup"},
   ]);
-  // Variable for storing the new edited meal
-  // const [newMeal, setNewMeal] = useState("");
 
   // Array containing breakfast options to be displayed in a modal
   const [breakfastOptions] = useState([
@@ -87,34 +85,25 @@ function Menu() {
   }, [menuCard]);
   
   // Function to handle editing of a meal
-  // function handleEditMeal(changedMenu, key) {
-  //   setNewMeal(prompt("Enter the new meal:"));
-  //   // using the functional form of setState to access the previous state and updating it with the new item
-  //   setMeals((prev) => {
-  //     const updatedItems = [...prev]; // saving the updated items to localStorage
-  //     if(key==="breakfast"){
-  //       updatedItems[changedMenu.id-1].breakfast = newMeal;
-  //     }
-  //     else if(key==="lunch"){
-  //       updatedItems[changedMenu.id-1].lunch = newMeal;
-  //     }
-  //     else if(key==="dinner"){
-  //       updatedItems[changedMenu.id-1].dinner = newMeal;
-  //     }
-  //     updateLocalStorage("meals", updatedItems); // returning the new items array with the new item added
-  //     return updatedItems;
-  //   });
-  //   // clearing the input fields for the new item
-  //   setNewMeal("");
-  // };
+  const handleEditMeal = (id, mealType) => {
+    const newMeal = prompt("Enter the new meal:");
+    // Creating a copy of the menuCard state
+    const updatedMenu = [...menuCard];
+    // Finding the meal to edit by id
+    const mealToEdit = updatedMenu.find(meal => meal.id === id);
+    // Updating the meal with the new meal
+    mealToEdit[mealType] = newMeal;
+    // Setting the state with the updated menu
+    setMenuCard(updatedMenu);
+    updateLocalStorage(menuCard);
+};
 
-  // Function to update localStorage with the current meals
-  // function updateLocalStorage(mealItems = meals) {
-  //   // saving the current meals as a JSON string in localStorage 
-  //   localStorage.setItem("meals", JSON.stringify(mealItems));
-  // };
+  // Function to update the local storage with the updated menu
+  const updateLocalStorage = (updatedMenu) => {
+    localStorage.setItem("menuCard", JSON.stringify(updatedMenu));
+  };  
 
-  // // Returning the JSX for the Menu component / Rendering the Menu component
+  // Returning the JSX for the Menu component / Rendering the Menu component
   return (
     <div className="container bg-light">
       {/* Heading and icon for the Outings component */}
@@ -179,15 +168,15 @@ function Menu() {
                 <ul className="list-group list-group-flush">
                   <li className={`list-group-item bg-warning d-flex justify-content-between`}>
                     {menu.breakfast}
-                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "breakfast")} /> */}
+                    <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu.id,"breakfast")} />
                   </li>
                   <li className={`list-group-item bg-success d-flex justify-content-between`}>
                     {menu.lunch}
-                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "lunch")} /> */}
+                    <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu.id,"lunch")} />
                   </li>
                   <li className={`list-group-item bg-info d-flex justify-content-between`}>
                     {menu.dinner}
-                    {/* <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu, "dinner")} /> */}
+                    <FontAwesomeIcon style={{marginLeft: "10px"}} icon={faEdit} onClick={() => handleEditMeal(menu.id,"dinner")} />
                   </li>
                 </ul>
             </div>
