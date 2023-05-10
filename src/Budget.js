@@ -18,38 +18,43 @@ function Budget() {
     { id:4, name: "Food Ordering", cost: 50},
     { id:5, name: "Outings", cost: 100},
   ]);
+  // Variables for storing amount spent and amount remaining
+  const [spent, setSpent] = useState();
+  const [remaining, setRemaining] = useState();
   // Variables for storing name and cost of new expense added
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
 
   // Using the useEffect hook for loading budget and expenses from local stroage
   useEffect(() => {
-    const storedBudget = JSON.parse(localStorage.getItem("budget")) || 500;
-    setBudget(storedBudget);
     const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || expenses;
     setExpenses(storedExpenses);
-  }, [expenses]);
+    const storedBudget = JSON.parse(localStorage.getItem("spent")) || 500;
+    setBudget(storedBudget);
+    const storedRemaining = JSON.parse(localStorage.getItem("remaining")) || budget;
+    setRemaining(storedRemaining);
+    const storedSpent = JSON.parse(localStorage.getItem("spent")) || 0;
+    setSpent(storedSpent);
+  }, [budget, expenses]);
 
   // Using the UseEffect hook for setting values of total expenses, spent and remaining
   useEffect(() => {
+    const storedBudget = JSON.parse(localStorage.getItem("budget")) || 500;
+    setBudget(storedBudget);
     const totalExpenses = expenses.reduce((total, item) => {
       return (total = total + item.cost);
     }, 0);
-    const spent = totalExpenses;
-    const remaining = budget - totalExpenses;
+    setSpent(totalExpenses);
+    const remainingAmount = budget - spent;
+    setRemaining(remainingAmount);
     // Updating the local storage
-    updateLocalStorage("totalExpenses", totalExpenses);
-    updateLocalStorage("spent", spent);
-    updateLocalStorage("remaining", remaining);
-  }, [expenses, budget]);
+    updateLocalStorage("spent", totalExpenses);
+    updateLocalStorage("remaining", remainingAmount);
+  }, [budget, expenses, spent]);
 
-  // loading values of total expenses, spent and remaining from local storage
-  const totalExpenses = JSON.parse(localStorage.getItem("totalExpenses")) || 0;
-  const spent = JSON.parse(localStorage.getItem("spent")) || 0;
-  const remaining = JSON.parse(localStorage.getItem("remaining")) || budget;
 
   // setting the alert color based on whether the user is within budget
-  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
+  const alertType = spent > budget ? "alert-danger" : "alert-success";
 
   // Function to handle editing of budget
   function handleEditBudget (){
@@ -115,7 +120,7 @@ function Budget() {
         </div>
         <div className="col-sm">
           {/* Alert displaying the current total amount spent */}
-          <div className="alert alert-primary">
+          <div className="alert alertType">
             <span>Spent: ${spent}</span>
           </div>
         </div>
