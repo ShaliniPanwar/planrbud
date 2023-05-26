@@ -39,20 +39,25 @@ function Grocery() {
   };
 
   // Function to handle adding a new grocery item
-  function handleAddNewGrocery(){
+  function handleAddNewGrocery() {
+    if (newGrocery.trim() === "") {
+      // checking if the new grocery text is blank or only contains whitespace
+      return; // exiting the function if it's blank
+    }
     const newItem = {
-    id: new Date().getTime(), // generating a unique id for the new item
-    text: newGrocery, // using the text entered in the input field for the new item's text
-    completed: false, // setting the initial completed status of the new item to false
-    quantity:1, // setting the initial quantity of the new item to 1
-    };
-    // using the functional form of setState to access the previous state and updating it with the new item
-    setGroceries((prev) => { 
-      updateLocalStorage([...prev, newItem]); // saving the updated items to localStorage
-      return [...prev, newItem]; // returning the new items array
-    });
-    setNewGroceryText(""); // clearing the input field for the new item
+      id: new Date().getTime(), // generating a unique id for the new item
+      text: newGrocery, // using the text entered in the input field for the new item's text
+      completed: false, // setting the initial completed status of the new item to false
+      quantity:1, // setting the initial quantity of the new item to 1
+      };
+      // using the functional form of setState to access the previous state and updating it with the new item
+      setGroceries((prev) => { 
+        updateLocalStorage([...prev, newItem]); // saving the updated items to localStorage
+        return [...prev, newItem]; // returning the new items array
+      });
+      setNewGroceryText(""); // clearing the input field for the new item
   }
+  
 
   // Function to update the localStorage with the current groceries list
   function updateLocalStorage(groceriesList = groceries) {
